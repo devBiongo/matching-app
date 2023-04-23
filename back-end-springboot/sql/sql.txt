@@ -1,0 +1,77 @@
+
+-- 用户信息表
+-- ----------------------------
+drop table if exists sys_user;
+create table sys_user (
+  user_name         varchar(30)                                comment '用户账号(主键)',
+  password          varchar(30)                    comment '用户密码',
+  event_id          varchar(20)      Unique Key                 comment '嘉宾唯一番号',
+  status            char(1)         default '0'                comment '账号状态',
+  del_flag          char(1)         default '0'                comment '删除flag',
+  login_ip          varchar(128)    default ''                 comment '最近登录ip地址',
+  login_date        datetime                                   comment '最近登录时间',
+  create_by         varchar(64)     default ''                 comment '创建者',
+  create_time       datetime                                   comment '创建时间',
+  update_by         varchar(64)     default ''                 comment '更新者',
+  update_time       datetime                                   comment '更新时间',
+  remark            varchar(500)    default null               comment '注释',
+  primary key (user_name)
+) engine=innodb comment = '用户信息表';
+
+
+-------------------------------
+-- 6、用户和角色关联表  用户N-1角色
+-- ----------------------------
+drop table if exists sys_user_role;
+create table sys_user_role (
+  user_name   varchar(20) not null comment '用户账号',
+  role_id   bigint(20) not null comment '角色ID',
+  primary key(user_name, role_id)
+) engine=innodb comment = '用户和角色关联表';
+
+
+-- ----------------------------
+-- 7、角色和菜单关联表
+-- ----------------------------
+drop table if exists sys_role_menu;
+create table sys_role_menu (
+  role_id   bigint(20) not null comment '角色ID',
+  menu_id   bigint(20) not null comment '菜?ID',
+  primary key(role_id, menu_id)
+) engine=innodb comment = '角色和菜单关联表';
+
+
+
+-- 活动参加者信息表
+drop table if exist `event_info`;
+create table if not exists `event_info`
+(
+`event_id` varchar(20)  primary key comment '参加者唯一番号',
+`real_name` varchar(256) not null comment '真实姓名',
+`gender` varchar(10) not null comment '性别',
+`height` varchar(10) not null comment '身高',
+`birthday` varchar(10) not null comment '出生年月',
+`final_education` varchar(10) not null comment '最终学历',
+`birthplace` varchar(10) not null comment '籍贯',
+`residence` varchar(30) not null comment '现住城市',
+`visaType` varchar(20) not null comment '签证类型',
+`occupation` varchar(10) not null comment '职业',
+`annualIncome` varchar(20) not null comment '年收入',
+`maritalStatus` varchar(1) not null comment '婚姻状况',
+`wechatNum` varchar(20) not null comment '微信',
+`phoneNum` varchar(20) not null comment '手机号',
+`private_flag` varchar(1) not null comment '是否保密',
+`avatar_id` varchar(50) not null comment '头像id',
+`selfIntroduction` varchar(256) not null comment '自我介绍',
+`requireAgeFrom` varchar(2) comment '择偶要求-年龄-from',
+`requireAgeTo` varchar(2) comment '择偶要求-年龄-to',
+`requireAnnualIncome` varchar(1) comment '择偶要求-最低年收入',
+`requireFinalEducation` varchar(1) comment '择偶要求-最低学历',
+`requireHeightFrom` varchar(3) comment '择偶要求-身高-from',
+`requireHeightTo` varchar(3) comment '择偶要求-身高-to',
+`requireMaritalStatus` varchar(1) comment '择偶要求-婚姻状态',
+`create_by`  varchar(64)  comment '创建者',
+`create_time` datetime    comment '创建时间',
+`update_by` varchar(64)   comment '更新者',
+`update_time`  datetime   comment '更新时间'
+) comment '活动参加者信息表';

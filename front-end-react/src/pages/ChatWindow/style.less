@@ -1,0 +1,52 @@
+.chat-window {
+    min-height: 100vh;
+    background-color: #fff;
+    overflow: hidden;
+
+    .char-header {
+        padding: 10px;
+        height: 80px;
+        line-height: 60px;
+        border-bottom: 2px solid rgb(248, 248, 248);
+    }
+
+    .content {
+        padding: 10px;
+        padding-top: 30px;
+
+        .first {
+            padding-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .second {
+            margin-top: 30px;
+            overflow: hidden;
+
+            .select-item {
+                display: inline-block;
+                height: 40px;
+                padding: 0 15px;
+                line-height: 40px;
+                background-color: rgb(251, 237, 224);
+                max-width: 200px;
+                border-radius: 5px;
+                transform: translateY(5px);
+                font-size: 14px;
+                &:hover{
+                    background-color: rgb(232, 184, 143);
+                }
+            }
+        }
+        .isAgree-area{
+            margin-top: 50px;
+            padding-left: 20px;
+            button{
+                margin: 0 5px;
+            }
+            button:nth-of-type(1){
+                margin-left: 20px;
+            }
+        }
+    }
+}

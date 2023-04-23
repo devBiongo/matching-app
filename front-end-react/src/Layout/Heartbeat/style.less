@@ -1,0 +1,47 @@
+.heartbeat-container {
+    padding: 20px 10px;
+    ul {
+        display: flex;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 1px 1px 5px rgba(144, 142, 142, .3);
+        border-radius: 20px;
+        color: rgb(226, 99, 120);
+        margin-bottom: 20px;
+        overflow: hidden;
+
+        li {
+            position: relative;
+            flex: 1;
+            text-align: center;
+            background-color: transparent;
+            padding: 5px;
+        }
+
+        .selected {
+            &::after {
+                content: "";
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                position: absolute;
+                background-color: orange;
+                top: 2px;
+                right: calc(50%-20px);
+            }
+        }
+    }
+
+    .profile-list {
+        width: 100%;
+
+        .spin {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        &>div {
+            margin-bottom: 10px;
+        }
+    }
+}

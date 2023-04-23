@@ -1,0 +1,60 @@
+
+server:
+  port: 8080
+
+spring:
+  servlet:
+    multipart:
+      max-request-size: 200MB
+      max-file-size: 200MB
+  datasource:
+    username: root
+    password: BionGo123
+    url: jdbc:mysql://101.43.62.156:3307/eventdev?useUnicode=true&characterEncoding=utf-8&useAffectedRows=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    port: 6379
+    host: 101.43.62.156
+    password: BionGo123
+
+token:
+  header: Authorization
+  secret: thisIsAAwSomeSecret12345
+  expireTime: 600
+
+mybatis-plus:
+  type-aliases-package: com.awe.model.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+upload:
+  mode: oss
+  oss:
+    url: http://awlewis-document-storage.oss-ap-northeast-1.aliyuncs.com/
+    endpoint: oss-ap-northeast-1.aliyuncs.com
+    accessKeyId: LTAI5tJCGYd6TssE2ceFQKFT
+    accessKeySecret: 7S4ElhDduVZfqvn9EezIHKKTwTcBtU
+    bucketName: awlewis-document-storage
+
+logging:
+  level:
+    org.springframework.web: trace
+    org.springframework.security: error
+    org.mybatis: debug
+  charset:
+    console: UTF-8
+    file: UTF-8
+  file:
+    # 切记，该文件表示正在产出日志的日志文件。并不会打包，当文件大于max-file-size,会根据file-name-pattern格式打包
+    # 名称为log/ota.log文件夹会在项目根目录下，打包后会在启动包同目录下；名称为/log/ota.log的文件夹会在项目所在磁盘的跟目录下
+    name: log/ota.log
+  logback:
+    rollingpolicy:
+      max-file-size: 1MB
+      max-history: 30
+      file-name-pattern: log/%d{yyyy-MM}/ota.%d{yyyy-MM-dd}.%i.log
+
+
+
+

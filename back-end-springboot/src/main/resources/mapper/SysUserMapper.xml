@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awe.mapper.SysUserMapper">
+    <select id="selectUserByUserName" resultType="SysUserDO">
+        select * from sys_user where user_name=#{username}
+    </select>
+    <select id="selectAllUsers" resultType="UserEventInfoMixDO">
+        select * ,private_flag as isPrivate from sys_user su
+        left join event_info ep  on ep.event_id = su.event_id
+        where su.del_flag='0'
+    </select>
+    <select id="selectDesignatedUsers" resultType="UserEventInfoMixDO">
+        select * ,private_flag as isPrivate from sys_user su
+        left join event_info ep  on ep.event_id = su.event_id
+        where su.del_flag='0'
+        <if test="username != null">
+            and su.user_name = #{username}
+        </if>
+        <if test="eventId != null">
+            and su.event_id = #{eventId}
+        </if>
+        <if test="phoneNum != null">
+            and ep.phoneNum = #{phoneNum}
+        </if>
+    </select>
+
+    <select id="selectRoleByUsername" resultType="String">
+        select  sur.role_id as role from sys_user su
+        left join sys_user_role sur on su.user_name = sur.user_name
+        where su.user_name = #{username}
+    </select>
+
+    <select id="checkAccountIsExist" parameterType="String" resultType="int">
+        select count(*) from sys_user
+        where user_name = #{username}
+    </select>
+
+    <insert id="doRegister">
+        insert into `sys_user` (user_name,password,create_by,create_time) values
+        (#{username},#{password},#{createBy},#{createTime});
+    </insert>
+    <insert id="addDefaultRole" >
+        insert into sys_user_role values (#{username}, '2');
+    </insert>
+
+
+
+    <update id="updateEventIdForCurrentUser">
+        update `sys_user` set event_id=#{eventId}, update_by=#{username} , update_time=#{updateTime}
+        where user_name = #{username}
+    </update>
+
+    <update id="deactivateAccountByUsername">
+        update `sys_user` set status=#{status}
+        where user_name = #{username}
+    </update>
+</mapper>

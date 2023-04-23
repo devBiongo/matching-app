@@ -1,0 +1,61 @@
+.chat-list-container {
+    padding: 0px 5px;
+    overflow: hidden;
+    &:hover{
+        background-color: rgb(248, 248, 248);
+    }
+    .chat-list-body {
+        display: flex;
+        margin: 10px;
+        .avatar-area {
+            flex: 1;
+        }
+        .message-area {
+            display: flex;
+            flex-direction: column;
+            padding: 5px 10px;
+            flex: 5;
+            .realName-area{
+                flex: 1;
+                span:first-child{
+                    font-size: 14px;
+                    float: left;
+                }
+                span:last-child{
+                    float: right;
+                    font-size: 12px;
+                    color: grey;
+                }
+            }
+            .latest-msg-area{
+                flex: 1;
+                font-size: 14px;
+                color: grey;
+            }
+        }
+    }
+}
+
+@keyframes active {
+    0% {}
+
+    50% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes move {
+    0% {}
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

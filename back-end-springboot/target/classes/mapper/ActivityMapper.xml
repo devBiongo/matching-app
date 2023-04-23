@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awe.mapper.ActivityMapper">
+    <select id="selectAllActivities" resultType="ActivityDO">
+        select
+        activity_id as activityId,
+        organizer,
+        org_date as orgDate,
+        org_place as orgPlace,
+        reg_male_num as regMaleNum,
+        reg_female_num as regFemaleNum,
+        attend_male_num as attendMaleNum,
+        attend_female_num as attendFemaleNum,
+        handInHand_num1 as handInHandNum1,
+        handInHand_num2 as handInHandNum2,
+        handInHand_num3 as handInHandNum3,
+        handInHand_num4 as handInHandNum4,
+        handInHand_num_all as handInHandNumAll,
+        status,
+        create_time as createTime,
+        update_time as updateTime
+        from activities_table
+        order by activity_id desc
+    </select>
+    <select id="getSpecifiedHistory" resultType="ActivityDO">
+        select
+        activity_id as activityId,
+        organizer,
+        org_date as orgDate,
+        org_place as orgPlace,
+        reg_male_num as regMaleNum,
+        reg_female_num as regFemaleNum,
+        attend_male_num as attendMaleNum,
+        attend_female_num as attendFemaleNum,
+        handInHand_num1 as handInHandNum1,
+        handInHand_num2 as handInHandNum2,
+        handInHand_num3 as handInHandNum3,
+        handInHand_num4 as handInHandNum4,
+        handInHand_num_all as handInHandNumAll,
+        status,
+        create_time as createTime,
+        update_time as updateTime
+        from activities_table
+        where activity_id = #{activityId}
+    </select>
+    <select id="getMatchInfo" resultType="FinalMatchDO">
+        select
+        initiator_id as initiatorId,
+        target_id as targetId,
+        reply_flag as replyFlag,
+        round
+        from
+        final_match
+        where round = #{round}
+        order by initiator_id
+    </select>
+    <update id="updateActivityHistory" parameterType="ActivityDO">
+        UPDATE activities_table
+        SET
+        organizer = #{organizer}
+        , org_date = #{orgDate}
+        , org_place = #{orgPlace}
+        , reg_male_num = #{regMaleNum}
+        , reg_female_num = #{regFemaleNum}
+        , attend_male_num = #{attendMaleNum}
+        , attend_female_num = #{attendFemaleNum}
+        , `handInHand_num1` = #{handInHandNum1}
+        , `handInHand_num2` = #{handInHandNum2}
+        , `handInHand_num3` = #{handInHandNum3}
+        , `handInHand_num4` = #{handInHandNum4}
+        , `handInHand_num_all` = #{handInHandNumAll}
+        , status = #{status}
+        , create_time = #{createTime}
+        , update_time = #{updateTime}
+        WHERE
+        activity_id = #{activityId}
+    </update>
+    <insert id="insertActivityHistory" parameterType="ActivityDO" >
+        insert into activities_table (organizer,org_date,org_place,reg_male_num,reg_female_num,status)
+        value (#{organizer},#{orgDate},#{orgPlace},#{regMaleNum},#{regFemaleNum},#{status})
+    </insert>
+</mapper>

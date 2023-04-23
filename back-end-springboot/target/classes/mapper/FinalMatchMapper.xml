@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awe.mapper.FinalMatchMapper">
+    <select id="getSelectableGuests" resultType="EventInfoDO">
+        select * from event_info where gender=#{gender} and del_flag = '0' and success = '0'
+    </select>
+    <select id="selectCountForMe" resultType="int">
+        select count(*) from final_match where initiator_id=#{eventId} and round = #{round}
+    </select>
+    <insert id="insertSweetHeart" parameterType="String">
+        insert into final_match (initiator_id,target_id,round) value (#{initiatorId},#{targetId},#{round})
+    </insert>
+    <select id="loadListWhoSelectedMe" parameterType="String" resultType="FinalMatchDO">
+        select
+        initiator_id as initiatorId,
+        target_id as targetId,
+        reply_flag as replyFlag
+        from final_match
+        where target_id = #{eventId} and round = #{round}
+    </select>
+    <select id="selectMatchStatus" parameterType="String" resultType="String">
+        select success from event_info where event_id = #{eventId}
+    </select>
+    <update id="replyGuestWhoSelectedMe" parameterType="String">
+        update final_match set reply_flag = #{replyFlag}
+        where initiator_id = #{initiatorId} and target_id = #{eventId} and round = #{round}
+    </update>
+    <update id="updateUserInfoStatus" parameterType="String">
+        UPDATE event_info
+        SET
+        success = #{targetId}
+        WHERE
+        event_id = #{eventId}
+    </update>
+</mapper>

@@ -1,0 +1,71 @@
+.login-container {
+    position: relative;
+    background-color: rgb(238, 184, 193);
+    min-height: 100vh;
+    overflow: hidden;
+
+    .login-wrapper {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -170px;
+        margin-top: -160px;
+        width: 340px;
+        height: 380px;
+        box-shadow: 1px 1px 5px rgba(144, 142, 142, .8);
+        background-color: #fff;
+        border-radius: 5px;
+        overflow: hidden;
+
+        ul {
+            transition: all .6s;
+            width: 100%;
+            padding: 20px 30px;
+
+            li:nth-child(1) {
+                text-align: center;
+                font-size: 18px;
+                font-weight: 500;
+                margin-top: 10px;
+                margin-bottom: 30px;
+            }
+
+            li:last-child {
+                font-size: 12px;
+                text-align: center;
+                margin-top: 30px;
+
+                span:first-child {
+                    color: #B3B3B3;
+                }
+
+                span:last-child {
+                    color: rgb(192, 114, 127);
+                    margin-left: 10px;
+                    cursor: pointer;
+                }
+            }
+
+        }
+
+        ul:first-child {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+
+        ul:last-child {
+            position: absolute;
+            top: 0px;
+            left: 340px;
+        }
+
+        ul.login-form {
+            left: -340px;
+        }
+
+        ul.register-form {
+            left: 0px;
+        }
+    }
+}
